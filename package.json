@@ -11,7 +11,8 @@
     "node": ">=20.0.0 <21.0.0"
   },
   "scripts": {
-    "build": "npm run build:types && ncc build src/main.ts",
+    "build": "run-s build:types bundle",
+    "bundle": "esbuild src/main.ts --bundle --outfile=dist/index.js --platform=node --target=node20.0.0 --packages=bundle",
     "build:types": "tsc src/async-function.ts -t es5 --declaration --allowJs --emitDeclarationOnly --outDir types",
     "format:check": "prettier --check src __test__",
     "format:write": "prettier --write src __test__",
@@ -53,7 +54,7 @@
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
-    "@vercel/ncc": "^0.38.0",
+    "esbuild": "^0.25.5",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
